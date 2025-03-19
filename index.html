@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Antakshari Game</title>
+</head>
+<body>
+    <h1>Word Antakshari Game</h1>
+    <input type="text" id="wordInput" placeholder="Enter a word">
+    <button onclick="submitWord()">Submit</button>
+    <p id="message"></p>
+    
+    <h3>Previous Word: <span id="lastWord"></span></h3>
+    <h3>Words Used:</h3>
+    <ul id="wordList"></ul>
+
+    <script>
+        let wordsUsed = [];
+        let lastWord = "";
+
+        async function submitWord() {
+    let word = document.getElementById("wordInput").value.trim().toLowerCase();
+    document.getElementById("wordInput").value = "";
+
+    if (!word) {
+        alert("Enter a valid word!");
+        return;
+    }
+
+    // Check if the word starts with the last letter of the previous word
+    if (lastWord && word[0] !== lastWord[lastWord.length - 1]) {
+        alert("Wrong word! Game restarted.");
+        
+        // Restart the game by clearing data in MongoDB
+        await fetch("http://localhost:5000/restart-game", {
+            method: "POST"
+        });
+
+        // Reset frontend variables
+        lastWord = "";
+        wordsUsed = [];
+        updateWordList();
+        return;
+    }
+
+    // Send word to backend
+    let response = await fetch("http://localhost:5000/add-word", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ word: word })
+    });
+
+    let result = await response.json();
+    document.getElementById("message").innerText = result.message;
+
+    if (result.message === "Word added successfully") {
+        lastWord = word;
+        wordsUsed.push(word);
+        updateWordList();
+    }
+}
+
+
+        function updateWordList() {
+            let list = document.getElementById("wordList");
+            list.innerHTML = "";
+            wordsUsed.forEach(w => {
+                let li = document.createElement("li");
+                li.textContent = w;
+                list.appendChild(li);
+            });
+            document.getElementById("lastWord").innerText = lastWord;
+        }
+    </script>
+</body>
+</html>
