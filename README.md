@@ -17,18 +17,13 @@ A fun **Word Antakshari** game where players take turns entering words, ensuring
 
 ##  Installation & Setup
 
-### 1️ Clone the Repository
-```bash
-git clone https://github.com/your-username/word-antakshari.git
-cd word-antakshari
-```
 
-### 2️ Install Dependencies
+###  Install Dependencies
 ```bash
 npm install
 ```
 
-### 3️ Set Up MongoDB
+###  Set Up MongoDB
 - Ensure **MongoDB is installed and running locally** or use **MongoDB Atlas**.
 - Update the database connection in **server.js**:
 ```javascript
@@ -38,12 +33,12 @@ mongoose.connect("mongodb://localhost:27017/antakshari", {
 });
 ```
 
-### 4️ Run the Server
+###  Run the Server
 ```bash
 node server.js
 ```
 
-### 5️ Open in Browser
+###  Open in Browser
 Visit: [http://localhost:5000](http://localhost:5000)
 
 ---
