@@ -8,16 +8,16 @@ A fun **Word Antakshari** game where players take turns entering words, ensuring
 - **MongoDB Integration**: Words are stored in the database for tracking.
 - **Restart Mechanism**: The game resets if a wrong word is entered.
 
-## 🛠 Tech Stack
+##  Tech Stack
 - **Frontend**: HTML, CSS, JavaScript
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB
 
 ---
 
-## 🏗 Installation & Setup
+##  Installation & Setup
 
-### 1️⃣ Clone the Repository
+### 1️ Clone the Repository
 ```bash
 git clone https://github.com/your-username/word-antakshari.git
 cd word-antakshari
